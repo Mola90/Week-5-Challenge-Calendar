@@ -72,7 +72,8 @@ $(document).ready(function() {
 
       var hourEl = $("<div>");    
       hourEl.addClass("row time-block " + tense);
-      hourEl.attr("id", "hour" + i);
+      var hourIdName = "hour" + i;
+      hourEl.attr("id", hourIdName);
       // add id 
 
       var innerHourEl = $("<div>");
@@ -82,7 +83,7 @@ $(document).ready(function() {
   
       var textEl = $("<textarea>");
       textEl.addClass("col-8 col-md-10 description");
-      //textEl.attr("id", i + "textArea");
+      textEl.attr("id", hourIdName + "textArea");
       textEl.attr("rows", "3");
   
       var saveButtonEl = $("<button>");
@@ -158,7 +159,17 @@ $(document).ready(function() {
   
   addTimeBlocks();
 
-  
+  $(".saveBtn").on("click", function(){
+    var clickedButton = $(this);
+    var timeId = clickedButton.parent().attr("id");
+
+    var textAreaId = timeId + "textArea";
+
+    var capturedText = $("#" + textAreaId).val();
+
+    localStorage.setItem(timeId, capturedText);
+    
+  })
 
 
 
