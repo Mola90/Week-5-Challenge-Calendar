@@ -34,6 +34,8 @@ $(document).ready(function() {
   var headingParagraphEl = $(".head-paragraph");
   var currentDayEl = $("#currentDay");
 
+  var tense = "";
+
 
   mainheadingEl.addClass("text-center");
   headingParagraphEl.addClass("text-center");
@@ -51,14 +53,28 @@ $(document).ready(function() {
       
       var meridiemIndicator = "AM";
 
-      var hourEl = $("<div>");    
-      hourEl.addClass("row time-block past");
-      hourEl.attr("id", "hour" + i);
-      // add id 
       if(i == 12){
         meridiemIndicator ="PM";
       }
+
+      if(i > currentHour){
+        tense = "future";
+      }
+
+      if(i == currentHour){
+        tense = "present"
+      }
+
+      if(i < currentHour){
+        tense = "past"
+      }
   
+
+      var hourEl = $("<div>");    
+      hourEl.addClass("row time-block " + tense);
+      hourEl.attr("id", "hour" + i);
+      // add id 
+
       var innerHourEl = $("<div>");
       innerHourEl.addClass("col-2 col-md-1 hour text-center py-3");
       innerHourEl.text(i + meridiemIndicator);
@@ -66,11 +82,16 @@ $(document).ready(function() {
   
       var textEl = $("<textarea>");
       textEl.addClass("col-8 col-md-10 description");
+      //textEl.attr("id", i + "textArea");
       textEl.attr("rows", "3");
   
       var saveButtonEl = $("<button>");
       saveButtonEl.addClass("btn saveBtn col-2 col-md-1");
+      //saveButtonEl.attr("id", i + "saveButton");
       saveButtonEl.attr("aria-label","save");
+
+     
+
   
       var saveIconeEl = $("<i>");
       saveIconeEl.addClass("fas fa-save");
@@ -84,9 +105,23 @@ $(document).ready(function() {
     for (var i = 1; i < 6; i++){
       
       var meridiemIndicator = "PM";
+      currentHour = currentHour - 12;
 
+      if(i > currentHour){
+        tense = "future";
+      }
+
+      if(i == currentHour){
+        tense = "present"
+      }
+
+      if(i < currentHour){
+        tense = "past"
+      }
+
+      
       var hourEl = $("<div>");    
-      hourEl.addClass("row time-block past");
+      hourEl.addClass("row time-block " + tense);
       hourEl.attr("id", "hour" + i);
      
   
@@ -101,6 +136,7 @@ $(document).ready(function() {
   
       var saveButtonEl = $("<button>");
       saveButtonEl.addClass("btn saveBtn col-2 col-md-1");
+      saveButtonEl.attr("id", i + "saveButton");
       saveButtonEl.attr("aria-label","save");
   
       var saveIconeEl = $("<i>");
@@ -121,6 +157,8 @@ $(document).ready(function() {
 
   
   addTimeBlocks();
+
+  
 
 
 
