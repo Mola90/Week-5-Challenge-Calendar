@@ -27,8 +27,7 @@
 
 
 $(document).ready(function() {
-  // Your DOM-interacting code goes here
-  // For example:
+
   var timeContainerEl = $("#time-container");
   var mainheadingEl = $(".main-heading");
   var headingParagraphEl = $(".head-paragraph");
@@ -45,7 +44,6 @@ $(document).ready(function() {
   currentDayEl.addClass("text-center");
 
   var currentHour = dayjs().format("H");
-  console.log(currentHour);
 
   function addTimeBlocks (){
     
